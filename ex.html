@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pcf-stylesheet path="/_resources/xsl/_programs/program_page_content_v2.xsl" title="Academic Program Page" extension="shtml"?>
+<!-- Basic TMPL file for page creation -->
+<!DOCTYPE document SYSTEM "http://commons.omniupdate.com/dtd/standard.dtd">
+
+<document xmlns:ouc="http://omniupdate.com/XSL/Variables">
+    <!-- loaded at the end of head -->
+    <headcode>
+        <script src="/_resources/programs/js/vendor/anime.min.js"></script>
+        <script src="/_resources/programs/js/vendor/main.js"></script>
+    </headcode>
+
+    <!-- loaded last -->
+    <footcode>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;500;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="/_resources/programs/css/program.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link href="/_resources/programs/css/career.css" rel="stylesheet" />
+        <link rel="stylesheet" href="/_resources/programs/css/spinner.css" />
+        <style>
+            .more {
+                cursor: pointer;
+                margin-top: 1rem;
+                display: inline-block;
+                border: 1px solid #ddd;
+                padding: 5px 10px;
+            }
+
+            .flex {
+                flex-wrap: wrap;
+            }
+            .flex-no-wrap {
+                display: flex;
+            }
+            .flex.vCenter {
+                align-items: center;
+            }
+
+            .flex.between {
+                justify-content: space-between;
+            }
+            .content-row {
+                gap: 15px;
+                display: flex;
+            }
+            .content-title {
+                margin: 0 0 20px;
+                text-align: center;
+            }
+            .collapse-content {
+                border: 1px solid #c1c1c1;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .card-style {
+                padding: 50px;
+                background-color: #e9e9e9;
+            }
+            .growth {
+                display: grid;
+                place-content: center;
+            }
+            .growth h3 {
+                margin: 0;
+                font-size: 1.4rem;
+                text-align: center;
+                padding-top: 20px;
+            }
+            .projected-data h3 {
+                font-size: 1.4rem;
+                text-align: center;
+                margin: 0;
+            }
+            .data {
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                gap: 20px;
+            }
+            .data p {
+                margin: 0;
+            }
+            .data-num {
+                font-size: 2.5rem;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .data-num img {
+                width: 17px;
+            }
+            .projected-emp {
+                display: flex;
+                background-color: #e9e9e9;
+                padding: 20px;
+                flex: 1;
+            }
+            .projected-data {
+                flex: 0.6;
+            }
+            .projected-chart {
+                flex: 1;
+            }
+            .projected-text-cont {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            .projected-text-cont > div {
+                display: flex;
+                text-align: center;
+                align-items: center;
+                font-size: 28px;
+                font-weight: 700;
+            }
+            .projected-text-cont p {
+                font-weight: 400;
+                font-size: 28px;
+            }
+            #projectedCanvas {
+                background-color: white;
+            }
+            .no-margin {
+                margin: 0;
+            }
+            .collapse-heading {
+                border: 1px solid black;
+                margin: 3.5rem 0 0;
+                max-width: initial;
+                padding-left: 20px;
+            }
+            .companies-container {
+                display: flex;
+                flex-direction: column;
+                width: 80%;
+            }
+            .comp__header {
+                display: flex;
+                justify-content: space-between;
+                font-weight: 600;
+            }
+            .comp__row {
+                display: flex;
+                justify-content: space-between;
+            }
+            .wages,
+            .levels,
+            .related-wages {
+                max-width: 100%;
+                min-width: 100%;
+            }
+
+            .vid-cont {
+                min-width: 100%;
+            }
+
+            p#tasks {
+                margin-left: 25px;
+            }
+
+            .license p {
+                text-align: center;
+            }
+
+            div#related_programs {
+                margin-bottom: 4em;
+            }
+
+            @media screen and (min-width: 1200px) {
+                .wages,
+                .levels,
+                .related-wages {
+                    max-width: 50%;
+                    min-width: 50%;
+                }
+                .vid-cont {
+                    min-width: 45%;
+                }
+                .job-desc {
+                    max-width: 50%;
+                }
+            }
+            .med_text {
+                font-size: 1.8rem;
+            }
+            #career_title h1 {
+                color: #00203c;
+            }
+
+            .career__header {
+                background: #fff;
+            }
+
+            .hero__details--title {
+                text-shadow: none;
+            }
+
+            .panel__title::after {
+                display: none;
+            }
+
+            @media screen and (max-width: 500px) {
+                #title {
+                    padding: 0 10px;
+                }
+            }
+        </style>
+    </footcode>
+
+    <!-- loaded before footcode on production only -->
+    <pubCode>
+        <script src="/_resources/programs/js/reveal_init.js"></script>
+        <script src="/_resources/programs/js/page_init_v3.js"></script>
+        <script src="/_resources/programs/js/vendor/moment.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script src="/_resources/programs/js/vendor/chartjs-plugin-datalabels.js"></script>
+        <script src="/_resources/programs/js/chartBuilder-dev.js"></script>
+        <script src="/_resources/programs/js/career_v3.js"></script>
+    </pubCode>
+
+    <ouc:properties label="metadata">
+        <title></title>
+        <meta name="author" content="San Diego Mesa College" />
+        <meta
+            name="description"
+            content="This is the official dev template... do not change unless instructed to"
+        />
+        <meta name="keywords" content="" />
+    </ouc:properties>
+
+    <ouc:div label="pageHeader" group="Everyone" button-text="Edit Page Header">
+        <ouc:editor
+            csspath="/_resources/ou/editor/content.css"
+            cssmenu="/_resources/ou/editor/styles.txt"
+            wysiwyg-class="maincontent"
+            width="1020"
+        />
+    </ouc:div>
+
+    <ouc:div
+        label="heroSection"
+        group="Everyone"
+        button-text="Edit Hero Section"
+    >
+        <ouc:editor
+            csspath="/_resources/ou/editor/content.css"
+            cssmenu="/_resources/ou/editor/styles.txt"
+            wysiwyg-class="maincontent"
+            width="1020"
+        />
+        <div class="hero_section">
+            <div class="career__header" id="title">
+                <div id="career_title">
+                    <h1 class="hero__details--title lg_text"></h1>
+                </div>
+            </div>
+        </div>
+    </ouc:div>
+
+    <ouc:div
+        label="pageContent"
+        group="Everyone"
+        button-text="Edit Related Programs"
+    >
+        <ouc:editor
+            csspath="/_resources/ou/editor/content.css"
+            cssmenu="/_resources/ou/editor/styles.txt"
+            wysiwyg-class="maincontent layout-1"
+            width="1020"
+        />
+        <div class="program__cost panel">
+            <div class="panel__title">
+                <h2>Summary</h2>
+            </div>
+            <div class="panel__content">
+                <div class="flex vCenter between">
+                    <div class="vid-cont">
+                        <div id="video" class="video"></div>
+                    </div>
+                    <div class="job-desc">
+                        <p class="sm_text" id="description"></p>
+                    </div>
+                </div>
+                <div class="flex-no-wrap vCenter between">
+                    <div>
+                        <h3 id="expert_advice_title">Expert Advice</h3>
+                        <p class="sm_text" id="expert-advice">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Esse, atque fugiat quibusdam, minus eos omnis
+                            debitis sequi dicta amolestiae maxime exercitationem
+                            cumque soluta adipisci voluptatum! Amet corrupti
+                            cupiditate officia explicabo tempore, quidem
+                            incidunt praesentium laudantium quis molestias
+                            optio, sapiente animi?
+                        </p>
+                    </div>
+                </div>
+                <div class="flex vCenter between">
+                    <div>
+                        <h3>Daily Tasks</h3>
+                        <p class="sm_text" id="tasks"></p>
+                    </div>
+                </div>
+                <h2 class="collapse-heading">Earnings &amp; Growth</h2>
+                <div class="collapse-content">
+                    <div class="content-row">
+                        <div class="wages">
+                            <h3 id="wages_title" class="no-margin">
+                                San Diego <span class="med_text">vs</span> CA
+                                <span class="med_text">vs</span> US
+                            </h3>
+                            <p id="wages" class="wages sm_text"></p>
+                        </div>
+                        <div class="related-wages">
+                            <h3 id="wages_title" class="no-margin">
+                                Related Careers Wages
+                            </h3>
+                            <p
+                                id="related-wages"
+                                class="related-wages sm_text"
+                            ></p>
+                        </div>
+                    </div>
+                    <h3 class="content-title">10 Year Projection</h3>
+                    <div class="content-row">
+                        <div class="growth card-style">
+                            <div class="data">
+                                <div>
+                                    <div class="data-num">
+                                        <p id="state-growth"></p>
+                                        <img src="" id="state-arrow" />
+                                    </div>
+                                    <p>California</p>
+                                </div>
+                                <div>
+                                    <div class="data-num">
+                                        <p id="national-growth"></p>
+                                        <img src="" id="national-arrow" />
+                                    </div>
+                                    <p>National</p>
+                                </div>
+                            </div>
+                            <h3>Potential Growth</h3>
+                        </div>
+                        <div class="projected-emp">
+                            <div
+                                class="projected-chart"
+                                id="projected-chart"
+                            ></div>
+                            <div class="projected-data">
+                                <h3>Projected Employment</h3>
+                                <div class="projected-text-cont">
+                                    <p>2033</p>
+                                    <div>
+                                        <p>CA</p>
+                                        <span id="ca-proj"></span>
+                                    </div>
+                                    <div>
+                                        <p>US</p>
+                                        <span id="us-proj"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="collapse-heading">Educational Pathway</h2>
+                <div class="collapse-content">
+                    <div class="flex">
+                        <div class="levels">
+                            <h3 class="no-margin">Educational Levels</h3>
+                            <p id="education" class="education sm_text"></p>
+                        </div>
+                        <div class="levels">
+                            <h3 class="no-margin">Available Programs</h3>
+                            <div class="related_programs" id="related_programs">
+                                <div class="preloader">
+                                    <div class="spinner">
+                                        <div class="rect1"></div>
+                                        <div class="rect2"></div>
+                                        <div class="rect3"></div>
+                                        <div class="rect4"></div>
+                                        <div class="rect5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="levels">
+                            <h3 class="no-margin">CA Licenses</h3>
+                            <div
+                                class="related_programs"
+                                id="CA_licenses"
+                            ></div>
+                        </div>
+                        <div class="levels">
+                            <div>
+                                <h3 class="no-margin">Technical Skills</h3>
+                                <p
+                                    id="technical_skills"
+                                    class="technical-skills sm_text"
+                                ></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="collapse-heading">Job Market Insights</h2>
+                <div class="collapse-content">
+                    <div class="flex">
+                        <div class="levels">
+                            <h3 class="no-margin">
+                                Top Companies Hiring in CA
+                            </h3>
+                            <div class="companies-container">
+                                <div class="comp__header">
+                                    <div>Companies</div>
+                                    <div># of Job Posts</div>
+                                </div>
+                                <div class="comp__data" id="comp__data">
+                                    <div class="comp__row">
+                                        <div class="comp_cell">
+                                            1. Company A
+                                        </div>
+                                        <div class="comp_cell">24</div>
+                                    </div>
+                                    <div class="comp__row">
+                                        <div class="comp_cell">
+                                            2. Company A
+                                        </div>
+                                        <div class="comp_cell">24</div>
+                                    </div>
+                                    <div class="comp__row">
+                                        <div class="comp_cell">
+                                            3. Company A
+                                        </div>
+                                        <div class="comp_cell">24</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="levels">
+                            <h3 class="no-margin">Competitiveness</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <div class="flex flex-center">
+                    <div class="license">
+                        <p class="sm_text">
+                            <a href="https://www.onetcenter.org/database.html">
+                                <img
+                                    src="https://www.onetcenter.org/image/link/onet-in-it.svg"
+                                    style="
+                                        width: 130px;
+                                        height: 60px;
+                                        border: none;
+                                    "
+                                    alt="O*NET in-it"
+                                />
+                            </a>
+                            <a
+                                href="http://www.careeronestop.org/"
+                                target="blank"
+                            >
+                                <img
+                                    src="http://www.careeronestop.org/tridionmultimedia/tcm24-26158_CareerOneStopLogo-linktous.gif"
+                                    border="0"
+                                    alt="careeronestop logo"
+                                />
+                            </a>
+                        </p>
+                        <p>
+                            This page includes information from the
+                            <a href="https://www.onetcenter.org/database.html"
+                                >O*NET 24.0 Database</a
+                            >
+                            by the U.S. Department of Labor, Employment and
+                            Training Administration (USDOL/ETA). Used under the
+                            <a
+                                href="https://creativecommons.org/licenses/by/4.0/"
+                                >CC BY 4.0</a
+                            >
+                            license. O*NET&reg; is a trademark of USDOL/ETA.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ouc:div>
+
+    <ouc:div
+        label="pageSectionPanelNav"
+        group="Everyone"
+        button-text="Edit Panel Nav"
+    >
+        <ouc:editor
+            csspath="/_resources/ou/editor/content.css"
+            cssmenu="/_resources/ou/editor/styles.txt"
+            wysiwyg-class="maincontent layout-1"
+            width="1020"
+        />
+        <div class="pagination" id="pagination"></div>
+    </ouc:div>
+
+    <ouc:div label="pageNav" group="Everyone" button-text="Edit Page Nav">
+        <ouc:editor
+            csspath="/_resources/ou/editor/content.css"
+            cssmenu="/_resources/ou/editor/styles.txt"
+            wysiwyg-class="maincontent layout-1"
+            width="1020"
+        />
+    </ouc:div>
+
+    <ouc:div label="pageFooter" group="Everyone" button-text="Edit Page Footer">
+        <ouc:editor
+            csspath="/_resources/ou/editor/content.css"
+            cssmenu="/_resources/ou/editor/styles.txt"
+            wysiwyg-class="maincontent layout-1"
+            width="1020"
+        />
+    </ouc:div>
+</document>
